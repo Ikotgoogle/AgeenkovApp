@@ -1,0 +1,95 @@
+﻿<Window x:Class="AgeenkovApp.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AgeenkovApp.View" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        xmlns:VM="clr-namespace:AgeenkovApp.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        MinHeight="490" 
+        MinWidth="800" 
+        Name="Main">
+    <Window.DataContext>
+        <VM:MainVM/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label Height="24">Заказчики:</Label>
+            <ComboBox x:Name="CompanyComboBox" Margin="3" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Add" Command="{Binding AddNewCustomerCommand}"/>
+                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Delete" Command="{Binding DeleteCustomerCommand}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Label Height="24">Проекты:</Label>
+            <ComboBox x:Name="ProjectComboBox" Margin="3" ItemsSource="{Binding SelectedCustomer.Projects}" SelectedItem="{Binding SelectedProject}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Add" Command="{Binding AddNewProjectCommand}"/>
+                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Delete" Command="{Binding DeleteProjectCommand}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <ScrollViewer MinWidth="250" Width="auto" Height="250" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding SelectedProject.Areas}" SelectedItem="{Binding SelectedArea}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBlock Text="{Binding Name}" Padding="3"/>
+                                <Button Content="Open" Command="{Binding DataContext.OpenAreaCommand, ElementName=Main}" CommandParameter="{Binding}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Add" Command="{Binding AddNewAreaCommand}"/>
+                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Delete" Command="{Binding DeleteAreaCommand}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.07*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.01*"/>
+            </Grid.RowDefinitions>
+            <Label>Отображение:</Label>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                <Image Source="{Binding Image}" Stretch="Uniform">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseWheel">
+                            <i:InvokeCommandAction Command="{Binding ZoomCommand}" PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                </Image>
+            </ScrollViewer>
+        </Grid>
+        </Grid>
+</Window>
