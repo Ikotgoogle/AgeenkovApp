@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgeenkovApp.View" 
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        xmlns:viewmodel="clr-namespace:AgeenkovApp.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:ProfileVM}"
         mc:Ignorable="d"
         Title="ProfileWindow" 
-        MinHeight="520" 
-        MinWidth="800">
+        MinHeight="550" Height="550" 
+        MinWidth="760" Width="760"
+        Name="Main">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,33 +25,42 @@
 
         <StackPanel>
             <Label>Operator:</Label>
-            <ComboBox />
+            <ComboBox Margin="3" ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="2,4,2,4">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding LastName}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Center">
-                <Button MinWidth="50" Width="auto" Height="20" Margin="0,0,10,0" Content="Add"/>
-                <Button MinWidth="50" Width="auto" Height="20" Margin="10,0,0,0" Content="Delete"/>
+                <Button MinWidth="50" Width="auto" Height="20" Margin="0,0,10,0" Content="Add" Command="{Binding AddNewOperatorCmd}"/>
+                <Button MinWidth="50" Width="auto" Height="20" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteOperatorCmd}"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
             <Label>Координаты профиля:</Label>
             <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding }" SelectedItem="{Binding }" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView ItemsSource="{Binding ProfileCoords}" SelectedItem="{Binding SelectedProfileCoords}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="X: "/>
-                                <TextBox MinWidth="40" Text="{Binding }">
+                                <TextBox MinWidth="40" Text="{Binding X}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding}" CommandParameter="{Binding}" />
+                                            <i:InvokeCommandAction Command="{Binding DataContext.SaveProfileCoordCmd, ElementName=Main}" CommandParameter="{Binding}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
                                 <Label Content="Y: "/>
-                                <TextBox MinWidth="40" Text="{Binding }">
+                                <TextBox MinWidth="40" Text="{Binding Y}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding}" CommandParameter="{Binding}" />
+                                            <i:InvokeCommandAction Command="{Binding DataContext.SaveProfileCoordCmd, ElementName=Main}" CommandParameter="{Binding}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
@@ -59,31 +71,31 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding }"/>
-                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding }"/>
+                <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddProfileCoordCmd}"/>
+                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteProfileCoordCmd}"/>
             </StackPanel>
         </StackPanel>
         
         <StackPanel Grid.Row="2">
-            <Label>Координаты пикетов:</Label>
+            <Label>Пикеты:</Label>
             <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding }" SelectedItem="{Binding }" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView ItemsSource="{Binding Pickets}" SelectedItem="{Binding SelectedPicket}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="X: "/>
-                                <TextBox MinWidth="40" Text="{Binding }">
+                                <TextBox MinWidth="40" Text="{Binding X}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding}" CommandParameter="{Binding}" />
+                                            <i:InvokeCommandAction Command="{Binding DataContext.SavePicketCoordCmd, ElementName=Main}" CommandParameter="{Binding}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
                                 <Label Content="Y: "/>
-                                <TextBox MinWidth="40" Text="{Binding }">
+                                <TextBox MinWidth="40" Text="{Binding Y}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding}" CommandParameter="{Binding}" />
+                                            <i:InvokeCommandAction Command="{Binding DataContext.SavePicketCoordCmd, ElementName=Main}" CommandParameter="{Binding}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
@@ -94,13 +106,41 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding }"/>
-                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding }"/>
+                <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddPicketCmd}"/>
+                <Button Width="70" Height="25" Margin="5,0,5,0" Content="Delete" Command="{Binding DeletePicketCmd}"/>
+                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Add data" Command="{Binding AddMeasuringCmd}"/>
             </StackPanel>
         </StackPanel>
         
         <Grid Grid.Column="1" Grid.RowSpan="3">
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding Measurings}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mesuaring ID" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="Picket ID" DisplayMemberBinding="{Binding Picket.Id}"/>
+                            <GridViewColumn Header="Operator" DisplayMemberBinding="{Binding Operators}"/>
+                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding MeasuringDateTime}"/>
+                            <GridViewColumn Header="Value" DisplayMemberBinding="{Binding MeasuringValue}"/>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Delete" Command="{Binding DeleteMeasuringCmd}" CommandParameter="{Binding}" ToolTip=""/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+
+
+
         </Grid>
     </Grid>
 </Window>

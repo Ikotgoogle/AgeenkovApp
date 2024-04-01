@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace AgeenkovApp.ViewModel {
     public class AreaVM : PropChange {
-        AggContext db = new AggContext();
+        AggContext db = AggContext.LoadAll();
 
         public ObservableCollection<Profile> Profiles { get; set; }
         public ObservableCollection<AreaCoords> AreaCoords { get; set; }
@@ -29,17 +29,15 @@ namespace AgeenkovApp.ViewModel {
         public Area Area { get; set; }
         public AreaVM(Area area) {
             Area = area;
-            db.AreaCoords.Load();
-            db.Profiles.Load();
 
             Profiles = db.Profiles.Local.ToObservableCollection();
             AreaCoords = db.AreaCoords.Local.ToObservableCollection();
 
             AddCoordCmd = new(AddCoord);
             AddRndCoordCmd = new(AddRndCoord);
-            DeleteCoordCmd = new(DeleteCoord, obj => SelectedCoord != null);
+            DeleteCoordCmd = new(DeleteCoord);
             AddProfileCmd = new(AddProfile);
-            DeleteProfileCmd = new(DeleteProfile, obj => SelectedProfile != null);
+            DeleteProfileCmd = new(DeleteProfile);
             OpenProfileCmd = new(OpenProfile);
             SaveCoordCmd = new(SaveCoord);
         }
@@ -66,7 +64,7 @@ namespace AgeenkovApp.ViewModel {
         }
 
         void AddCoord(object obj) {
-            var coord = new AreaCoords();
+            var coord = new AreaCoords() { X = 0, Y = 0, Area = Area};
             db.AreaCoords.Add(coord);
             db.SaveChanges();
             SelectedCoord = coord;

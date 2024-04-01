@@ -8,8 +8,8 @@
         xmlns:VM="clr-namespace:AgeenkovApp.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" 
-        MinHeight="490" 
-        MinWidth="800" 
+        MinHeight="550" Height="550" 
+        MinWidth="760" Width="760"
         Name="Main">
     <Window.DataContext>
         <VM:MainVM/>
@@ -27,7 +27,7 @@
 
         <StackPanel>
             <Label Height="24">Заказчики:</Label>
-            <ComboBox x:Name="CompanyComboBox" Margin="3" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
+            <ComboBox Margin="3" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"/>

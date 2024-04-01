@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace AgeenkovApp.ViewModel {
     public class MainVM : PropChange {
-        AggContext db = new AggContext();
+        AggContext db = AggContext.LoadAll();
 
         #region gets and sets
         public ObservableCollection<Customer> Customers { get; set; }
@@ -28,10 +28,6 @@ namespace AgeenkovApp.ViewModel {
         public MainVM() {
             //db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
-
-            db.Customers.Load();
-            db.Projects.Load();
-            db.Areas.Load();
 
             Customers = db.Customers.Local.ToObservableCollection();
             Projects = db.Projects.Local.ToObservableCollection();
@@ -68,7 +64,7 @@ namespace AgeenkovApp.ViewModel {
 
         #region Add Commands
         void AddNewCustomer(object obj) {
-            var customer = new Customer() { Name = "", Email = "", };
+            var customer = new Customer() { Name = "", Email = "" };
             if(new NewCustomerWindow(customer).ShowDialog() == false) { return; } else if(customer.Name == "" || customer.Email == "") {
                 MessageBox.Show("NEW CUST Заполните все поля!", "Предупреждение");
             } else {

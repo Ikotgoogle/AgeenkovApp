@@ -16,5 +16,24 @@ namespace AgeenkovApp.Model {
             optionsBuilder.UseSqlServer($@"Server=.;Database=AggAppNew;Trusted_Connection=True;TrustServerCertificate=True;");
             //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AgeenkovAppNew;Trusted_Connection=True;");
         }
+
+        private static AggContext loadAll;
+        public static AggContext LoadAll(){
+            if(loadAll == null) { 
+                loadAll = new AggContext();
+
+                loadAll.Customers.Load();
+                loadAll.Projects.Load();
+                loadAll.Areas.Load();
+                loadAll.AreaCoords.Load();
+                loadAll.Profiles.Load();
+                loadAll.ProfileCoords.Load();
+                loadAll.Pickets.Load();
+                loadAll.Operators.Load();
+                loadAll.Measurings.Load();
+                loadAll.SaveChanges();
+            }
+            return loadAll;
+        }
     }    
 }

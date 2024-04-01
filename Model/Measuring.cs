@@ -8,10 +8,10 @@ namespace AgeenkovApp.Model {
             set { id = value; OnPropertyChanged(nameof(Id)); }
         }
 
-        private ObservableCollection<Operator> operators;
-        public ObservableCollection<Operator> Operators {
-            get => operators;
-            set { operators = value; OnPropertyChanged(nameof(Operators)); }
+        private Operator oper;
+        public Operator Operator {
+            get => oper;
+            set { oper = value; OnPropertyChanged(nameof(Operator)); }
         }
 
         private Picket picket;

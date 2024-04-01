@@ -1,4 +1,6 @@
-﻿namespace AgeenkovApp.Model {
+﻿using System.Collections.ObjectModel;
+
+namespace AgeenkovApp.Model {
     public class Operator : PropChange {
         private int id;
         public int Id {
@@ -24,8 +26,8 @@
             set { email = value; OnPropertyChanged(nameof(Email)); }
         }
 
-        private Measuring measuring;
-        public Measuring Measuring {
+        private ObservableCollection<Measuring> measuring;
+        public ObservableCollection<Measuring> Measuring {
             get => measuring;
             set { measuring = value; OnPropertyChanged(nameof(Measuring)); }
         }
