@@ -54,13 +54,13 @@ namespace AgeenkovApp.ViewModel {
         private AreaCoords selectedCoord;
         public AreaCoords SelectedCoord {
             get => selectedCoord;
-            set { selectedCoord = value; OnPropertyChanged(nameof(SelectedCoord)); }
+            set { selectedCoord = value; OnPropertyChanged(nameof(SelectedCoord)); Redraw(); }
         }
 
         private Profile selectedProfile;
         public Profile SelectedProfile {
             get => selectedProfile;
-            set { selectedProfile = value; OnPropertyChanged(nameof(SelectedProfile)); }
+            set { selectedProfile = value; OnPropertyChanged(nameof(SelectedProfile)); Redraw(); }
         }
 
         void AddCoord(object obj) {

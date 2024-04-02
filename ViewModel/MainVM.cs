@@ -46,19 +46,19 @@ namespace AgeenkovApp.ViewModel {
         private Customer selectedCustomer;
         public Customer SelectedCustomer {
             get => selectedCustomer;
-            set { selectedCustomer = value; OnPropertyChanged(nameof(SelectedCustomer)); }
+            set { selectedCustomer = value; OnPropertyChanged(nameof(SelectedCustomer)); Redraw(); }
         }
 
         private Project selectedProject;
         public Project SelectedProject {
             get => selectedProject;
-            set { selectedProject = value; OnPropertyChanged(nameof(SelectedProject)); }
+            set { selectedProject = value; OnPropertyChanged(nameof(SelectedProject)); Redraw(); }
         }
 
         private Area selectedArea;
         public Area SelectedArea {
             get => selectedArea;
-            set { selectedArea = value; OnPropertyChanged(nameof(SelectedArea)); }
+            set { selectedArea = value; OnPropertyChanged(nameof(SelectedArea)); Redraw(); }
         }
         #endregion
 

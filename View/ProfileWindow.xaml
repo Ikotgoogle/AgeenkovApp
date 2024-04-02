@@ -44,7 +44,7 @@
         <StackPanel Grid.Row="1">
             <Label>Координаты профиля:</Label>
             <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding ProfileCoords}" SelectedItem="{Binding SelectedProfileCoords}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView ItemsSource="{Binding Profile.Coords}" SelectedItem="{Binding SelectedProfileCoords}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -75,11 +75,11 @@
                 <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteProfileCoordCmd}"/>
             </StackPanel>
         </StackPanel>
-        
+
         <StackPanel Grid.Row="2">
             <Label>Пикеты:</Label>
             <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding Pickets}" SelectedItem="{Binding SelectedPicket}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView ItemsSource="{Binding Profile.Pickets}" SelectedItem="{Binding SelectedPicket}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -99,6 +99,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
+                                <Button Command="{Binding DataContext.OpenPicketCmd, ElementName=Main}" CommandParameter="{Binding}" Content="Open" Margin="20,0,0,0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -107,40 +108,12 @@
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddPicketCmd}"/>
-                <Button Width="70" Height="25" Margin="5,0,5,0" Content="Delete" Command="{Binding DeletePicketCmd}"/>
-                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Add data" Command="{Binding AddMeasuringCmd}"/>
+                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeletePicketCmd}"/>
             </StackPanel>
         </StackPanel>
         
-        <Grid Grid.Column="1" Grid.RowSpan="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.8*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding Measurings}" d:ItemsSource="{d:SampleData ItemCount=5}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mesuaring ID" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Picket ID" DisplayMemberBinding="{Binding Picket.Id}"/>
-                            <GridViewColumn Header="Operator" DisplayMemberBinding="{Binding Operators}"/>
-                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding MeasuringDateTime}"/>
-                            <GridViewColumn Header="Value" DisplayMemberBinding="{Binding MeasuringValue}"/>
-                            <GridViewColumn>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Delete" Command="{Binding DeleteMeasuringCmd}" CommandParameter="{Binding}" ToolTip=""/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </ScrollViewer>
-
-
-
-        </Grid>
+        <ScrollViewer Grid.Column="1" Grid.RowSpan="3" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <Image Source="{Binding Image}" Stretch="Uniform" Margin="5"></Image>
+        </ScrollViewer>
     </Grid>
 </Window>

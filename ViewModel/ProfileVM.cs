@@ -1,14 +1,9 @@
 ﻿using AgeenkovApp.Model;
 using AgeenkovApp.View;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace AgeenkovApp.ViewModel {
     public class ProfileVM : PropChange {
@@ -22,6 +17,7 @@ namespace AgeenkovApp.ViewModel {
         public RelayCommand AddPicketCmd { get; set; }
         public RelayCommand SavePicketCoordCmd { get; set; }
         public RelayCommand DeletePicketCmd { get; set; }
+        public RelayCommand OpenPicketCmd { get; set; }
         public RelayCommand AddMeasuringCmd { get; set; }
         public RelayCommand DeleteMeasuringCmd { get; set; }
 
@@ -29,8 +25,8 @@ namespace AgeenkovApp.ViewModel {
         public ObservableCollection<Operator> Operators { get; set; }
         public ObservableCollection<ProfileCoords> ProfileCoords { get; set; }
         public ObservableCollection<Picket> Pickets { get; set; }
-        public ObservableCollection<Measuring> Measurings { get; set; }
 
+        public ProfileVM() : this(new Profile()) { }
 
         public ProfileVM(Profile profile) {
             Profile = profile;
@@ -38,7 +34,6 @@ namespace AgeenkovApp.ViewModel {
             Operators = db.Operators.Local.ToObservableCollection();
             ProfileCoords = db.ProfileCoords.Local.ToObservableCollection();
             Pickets = db.Pickets.Local.ToObservableCollection();
-            Measurings = db.Measurings.Local.ToObservableCollection();
 
             AddNewOperatorCmd = new(AddNewOperator);
             DeleteOperatorCmd = new(DeleteOperator);
@@ -49,8 +44,7 @@ namespace AgeenkovApp.ViewModel {
             SavePicketCoordCmd = new(SavePicketCoord);
             DeletePicketCmd = new(DeletePicket);
 
-            AddMeasuringCmd = new(AddMeasuring);
-            DeleteMeasuringCmd = new(DeleteMeasuring);
+            OpenPicketCmd = new(OpenPicket);
         }
 
         private Operator selectedOperator;
@@ -62,13 +56,13 @@ namespace AgeenkovApp.ViewModel {
         private ProfileCoords selectedProfileCoords;
         public ProfileCoords SelectedProfileCoords {
             get => selectedProfileCoords;
-            set { selectedProfileCoords = value; OnPropertyChanged(nameof(SelectedProfileCoords)); }
+            set { selectedProfileCoords = value; OnPropertyChanged(nameof(SelectedProfileCoords)); Redraw(); }
         }
 
         private Picket selectedPicket;
         public Picket SelectedPicket {
             get => selectedPicket;
-            set { selectedPicket = value; OnPropertyChanged(nameof(SelectedPicket)); }
+            set { selectedPicket = value; OnPropertyChanged(nameof(SelectedPicket)); Redraw(); }
         }
 
         void AddNewOperator(object obj) {
@@ -132,23 +126,34 @@ namespace AgeenkovApp.ViewModel {
             db.SaveChanges();
         }
 
-        void AddMeasuring(object obj) {
-            if(SelectedPicket == null) return;
-            var meas = new Measuring() { MeasuringDateTime = DateTime.Now, MeasuringValue = 0 };
-            if(new NewMeasuring(meas, Operators, SelectedPicket).ShowDialog() == false) return;
-            //else if(meas.MeasuringValue == null) { return; } 
-            else {
-                db.Measurings.Add(meas);
-                db.SaveChanges();
-            }
+        void OpenPicket(object obj) {
+            if(SelectedOperator == null) return;    
+            new PicketWindow() {
+                DataContext = new PicketVM((Picket)obj, SelectedOperator)
+            }.ShowDialog();
+            OnPropertyChanged(nameof(obj));
         }
 
-        void DeleteMeasuring(object obj) {
-            if(MessageBox.Show("Are you sure?", "Delete measuring",
-                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
-                db.Measurings.Remove((Measuring)obj);
-                db.SaveChanges();
+        private DrawingImage image;
+        public DrawingImage Image {
+            get => image;
+            set { image = value; OnPropertyChanged(nameof(Image)); }
+        }
+        void Redraw() {
+            var newimage = new DrawModel();
+            if(Profile.IsCorrect()) Profile.Draw(newimage, Brushes.Gray);
+            else Profile.Draw(newimage, Brushes.Red);
+            foreach(var p in Profile?.Coords ?? new()) {
+                if(p == SelectedProfileCoords) newimage.DrawCircle(p.X, p.Y, 0.15, Brushes.Green);
+                else newimage.DrawCircle(p.X, p.Y, 0.15, Brushes.DarkGray);
             }
+            foreach(var p in Profile?.Pickets ?? new()) {
+                if(p == SelectedPicket && p.IsOnProfile()) newimage.DrawFlag(p.X, p.Y, 0.17, Brushes.Red);
+                else if(p == SelectedPicket && !p.IsOnProfile()) newimage.DrawFlag(p.X, p.Y, 0.17, Brushes.Black);
+                else if(p != SelectedPicket && p.IsOnProfile()) newimage.DrawFlag(p.X, p.Y, 0.17, Brushes.DarkRed);
+                else if(p != SelectedPicket && !p.IsOnProfile()) newimage.DrawFlag(p.X, p.Y, 0.17, Brushes.DarkOliveGreen);
+            }
+            Image = newimage.Render();
         }
     }
 }

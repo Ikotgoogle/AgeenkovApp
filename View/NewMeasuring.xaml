@@ -4,11 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgeenkovApp.View" 
-        xmlns:viewmodel="clr-namespace:AgeenkovApp.ViewModel" 
-        d:DataContext="{d:DesignInstance Type=viewmodel:AddMeasuringVM}"
-        mc:Ignorable="d"
+        xmlns:viewmodel="clr-namespace:AgeenkovApp.ViewModel"
         Title="NewMeasuring" 
-        Height="280" Width="400" 
+        Height="220" Width="400" 
         ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,7 +29,7 @@
                     <TextBlock HorizontalAlignment="Left" Margin="31,10,0,0" FontSize="16">Значение:</TextBlock>
                     <TextBox Margin="10,0,0,0" Width="150" Height="22" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="{Binding Path=MeasuringValue}"></TextBox>
                 </DockPanel>
-                <DockPanel Margin="0,15,0,0">
+                <!--<DockPanel Margin="0,15,0,0">
                     <TextBlock HorizontalAlignment="Left" Margin="34,10,0,0" FontSize="16">Оператор:</TextBlock>
                     <ComboBox ItemsSource="{Binding Operators}" SelectedItem="{Binding SelOper}" Margin="5">
                         <ComboBox.ItemTemplate>
@@ -43,10 +41,10 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </DockPanel>
+                </DockPanel>-->
                 <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.575,1.238" Orientation="Horizontal">
                     <Button Width="50" Height="22" Margin="0,0,15,0" Click="Button_Click" IsDefault="True">Save</Button>
-                    <Button Width="50" Height="22" Margin="15,0,0,0" IsCancel="True" Command="{Binding ClickOKCmd}">Cancel</Button>
+                    <Button Width="50" Height="22" Margin="15,0,0,0" IsCancel="True" >Cancel</Button>
                 </StackPanel>
             </StackPanel>
         </Border>

@@ -82,13 +82,7 @@
             </Grid.RowDefinitions>
             <Label>Отображение:</Label>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
-                <Image Source="{Binding Image}" Stretch="Uniform">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PreviewMouseWheel">
-                            <i:InvokeCommandAction Command="{Binding ZoomCommand}" PassEventArgsToCommand="True" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-                </Image>
+                <Image Source="{Binding Image}" Stretch="Uniform"></Image>
             </ScrollViewer>
         </Grid>
         </Grid>

@@ -17,14 +17,6 @@ namespace AgeenkovApp.Model {
             drawingGroup.Children.Add(geometryDrawing);
         }
 
-        public void DrawPoly(ICollection<Point> points, Brush brush, double width, bool isClosed) {
-            if(points == null || !points.Any()) return;
-            var figure = new PathFigure(points.First(), points.Skip(1).Select(p => new LineSegment(p, true)), isClosed);
-            var pathGeometry = new PathGeometry([figure]);
-            var geometryDrawing = new GeometryDrawing(null, new Pen(brush, width) { LineJoin = PenLineJoin.Round, DashCap = PenLineCap.Round }, pathGeometry);
-            drawingGroup.Children.Add(geometryDrawing);
-        }
-
         public void DrawText(string text, double x, double y, Brush brush, double size = 10) {
             var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), size, brush, 1);
             var textGeometry = formattedText.BuildGeometry(new Point(x, y));
@@ -41,6 +33,40 @@ namespace AgeenkovApp.Model {
         public void DrawCircle(double x, double y, double radius, string hexColor) {
             SolidColorBrush brush = (SolidColorBrush)new BrushConverter().ConvertFromString(hexColor)!;
             DrawCircle(x, y, radius, brush);
+        }
+
+        public void DrawPoly(ICollection<Point> points, Brush brush, double width, bool isClosed) {
+            if(points == null || !points.Any()) return;
+            var figure = new PathFigure(points.First(), points.Skip(1).Select(p => new LineSegment(p, true)), isClosed);
+            var pathGeometry = new PathGeometry([figure]);
+            var geometryDrawing = new GeometryDrawing(null, new Pen(brush, width) { LineJoin = PenLineJoin.Round, DashCap = PenLineCap.Round }, pathGeometry);
+            drawingGroup.Children.Add(geometryDrawing);
+        }
+
+        public void DrawFlag(double x, double y, double radius, Brush brush) {
+            var flagDrawingGroup = new DrawingGroup();
+
+            var stickStartPoint = new Point(x, y);
+            var stickEndPoint = new Point(x, y - radius * 2);
+            var stickGeometry = new LineGeometry(stickStartPoint, stickEndPoint);
+            var stickDrawing = new GeometryDrawing(Brushes.Brown, new Pen(brush, 0.05), stickGeometry);
+            flagDrawingGroup.Children.Add(stickDrawing);
+
+            var circleGeometry = new EllipseGeometry(new Point(x, y), radius / 2, radius / 2);
+            var circleDrawing = new GeometryDrawing(brush, null, circleGeometry);
+            flagDrawingGroup.Children.Add(circleDrawing);
+
+            var triangleGeometry = new PathGeometry();
+            var figure = new PathFigure();
+            figure.StartPoint = new Point(x - radius / 5, y - radius * 2 - radius / 5);
+            figure.Segments.Add(new LineSegment(new Point(x + radius / 5, y - radius * 2), true));
+            figure.Segments.Add(new LineSegment(new Point(x - radius / 5, y - radius * 2 + radius / 5), true));
+            figure.IsClosed = true;
+            triangleGeometry.Figures.Add(figure);
+            var triangleDrawing = new GeometryDrawing(brush, new Pen(brush, 0.1), triangleGeometry);
+            flagDrawingGroup.Children.Add(triangleDrawing);
+
+            drawingGroup.Children.Add(flagDrawingGroup);
         }
 
         public DrawingImage Render(int offset = 3, int grid = 10, bool drawAxes = false) {
