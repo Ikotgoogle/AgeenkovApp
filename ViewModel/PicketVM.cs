@@ -22,11 +22,12 @@ namespace AgeenkovApp.ViewModel {
             Picket = picket;
             Operator = oper;
 
-            Measurings = picket.Measurings;
+            Measurings = db.Measurings.Local.ToObservableCollection();
 
             AddMeasuringCmd = new(AddMeasuring);
             DeleteMeasuringCmd = new(DeleteMeasuring);
             RefreshCmd = new(Refresh);
+            SetPlotModel();
         }
 
         void AddMeasuring(object obj) {
@@ -63,45 +64,44 @@ namespace AgeenkovApp.ViewModel {
             set { plotModel = value; OnPropertyChanged(nameof(PlotModel)); }
         }
         private void SetPlotModel() {
-            var plotModel = new PlotModel() { Title = "График значений" };
+            var plotModel = new PlotModel { Title = "График значений" };
 
-            // Configure X-axis for DateTime (assuming MeasuringDateTime is DateTime type)
             var xAxis = new DateTimeAxis {
-                Position = AxisPosition.Top,
+                Position = AxisPosition.Bottom,
                 Title = "Время измерения",
-                StringFormat = "MM/dd/yyyy HH:mm" // Adjust format as needed
+                StringFormat = "MM/dd/yyyy HH:mm", // Customize the date and time format if needed
+                IntervalType = DateTimeIntervalType.Seconds,
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.None
             };
+
             var yAxis = new LinearAxis {
                 Position = AxisPosition.Left,
                 Title = "Значение измерения",
-                StartPosition = Double.MaxValue,
-                EndPosition = Double.MinValue
-            }; // Set initial range based on data
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.None
+            };
 
             plotModel.Axes.Add(xAxis);
             plotModel.Axes.Add(yAxis);
 
-            // Create line series for measurements
-            var lineSeries = new LineSeries {
-                Title = "Измерения",
-                Color = OxyColors.Blue,
-                StrokeThickness = 2,
-                MarkerType = MarkerType.Circle,
-                MarkerSize = 4,
-                MarkerStroke = OxyColors.Black,
-                MarkerFill = OxyColors.LightBlue
-            };
-
-            // Add data points from Measurings collection
-            foreach(var measuring in Picket.Measurings) {
-                lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(measuring.MeasuringDateTime), measuring.MeasuringValue));
-                // Update axis ranges based on data
-                yAxis.StartPosition = Math.Min(yAxis.StartPosition, measuring.MeasuringValue);
-                yAxis.EndPosition = Math.Max(yAxis.EndPosition, measuring.MeasuringValue);
+            foreach(var meas in Measurings) {
+                if(meas.MeasuringValue != null) {
+                    var lineSeries = new LineSeries {
+                        Title = "График",
+                        Color = OxyColors.Black,
+                        StrokeThickness = 3,
+                        MarkerType = MarkerType.Circle,
+                        MarkerSize = 2,
+                        MarkerStroke = OxyColors.Red,
+                        MarkerFill = OxyColors.Red
+                    };
+                    foreach(var val in Picket.Measurings) {
+                        lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(val.MeasuringDateTime), val.MeasuringValue));
+                    }
+                    plotModel.Series.Add(lineSeries);
+                }
             }
-
-            plotModel.Series.Add(lineSeries);
-
             PlotModel = plotModel;
         }
     }
