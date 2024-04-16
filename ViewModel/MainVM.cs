@@ -7,8 +7,7 @@ using System.Windows.Media;
 
 namespace AgeenkovApp.ViewModel {
     public class MainVM : PropChange {
-        AggContext db = AggContext.LoadAll();
-
+        AggContext db = new AggContext();
         #region gets and sets
         public ObservableCollection<Customer> Customers { get; set; }
         public ObservableCollection<Project> Projects { get; set; }
@@ -26,9 +25,8 @@ namespace AgeenkovApp.ViewModel {
         public RelayCommand OpenAreaCommand { get; set; }
         #endregion
         public MainVM() {
-            //db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
-
+            db=AggContext.LoadAll();
             Customers = db.Customers.Local.ToObservableCollection();
             Projects = db.Projects.Local.ToObservableCollection();
             Areas = db.Areas.Local.ToObservableCollection();

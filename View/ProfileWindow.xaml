@@ -43,7 +43,7 @@
 
         <StackPanel Grid.Row="1">
             <Label>Координаты профиля:</Label>
-            <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer MinWidth="230" Width="auto" Height="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView ItemsSource="{Binding Profile.Coords}" SelectedItem="{Binding SelectedProfileCoords}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -71,14 +71,14 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddProfileCoordCmd}"/>
-                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteProfileCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddProfileCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteProfileCoordCmd}"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <Label>Пикеты:</Label>
-            <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer MinWidth="230" Width="auto" Height="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView ItemsSource="{Binding Profile.Pickets}" SelectedItem="{Binding SelectedPicket}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -107,8 +107,8 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="70" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddPicketCmd}"/>
-                <Button Width="70" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeletePicketCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddPicketCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeletePicketCmd}"/>
             </StackPanel>
         </StackPanel>
         

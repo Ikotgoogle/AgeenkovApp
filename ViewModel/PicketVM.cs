@@ -27,7 +27,6 @@ namespace AgeenkovApp.ViewModel {
             AddMeasuringCmd = new(AddMeasuring);
             DeleteMeasuringCmd = new(DeleteMeasuring);
             RefreshCmd = new(Refresh);
-            SetPlotModel();
         }
 
         void AddMeasuring(object obj) {

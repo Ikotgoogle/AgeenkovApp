@@ -19,7 +19,6 @@ namespace AgeenkovApp.ViewModel {
         public ObservableCollection<AreaCoords> AreaCoords { get; set; }
 
         public RelayCommand AddCoordCmd { get; set; }
-        public RelayCommand AddRndCoordCmd { get; set; }
         public RelayCommand DeleteCoordCmd { get; set; }
         public RelayCommand AddProfileCmd { get; set; }
         public RelayCommand DeleteProfileCmd { get; set; }
@@ -34,7 +33,6 @@ namespace AgeenkovApp.ViewModel {
             AreaCoords = db.AreaCoords.Local.ToObservableCollection();
 
             AddCoordCmd = new(AddCoord);
-            AddRndCoordCmd = new(AddRndCoord);
             DeleteCoordCmd = new(DeleteCoord);
             AddProfileCmd = new(AddProfile);
             DeleteProfileCmd = new(DeleteProfile);
@@ -69,10 +67,6 @@ namespace AgeenkovApp.ViewModel {
             db.SaveChanges();
             SelectedCoord = coord;
             OnPropertyChanged(nameof(Area));
-        }
-
-        void AddRndCoord(object obj) {
-            
         }
 
         void DeleteCoord(object obj) {

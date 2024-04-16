@@ -8,7 +8,7 @@
         d:DataContext="{d:DesignInstance Type=model:Operator}"
         mc:Ignorable="d"
         Title="NewOperatorWindow" 
-        Height="275" Width="400" ResizeMode="NoResize">
+        Height="325" Width="400" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"/>

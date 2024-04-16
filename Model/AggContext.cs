@@ -11,16 +11,22 @@ namespace AgeenkovApp.Model {
         public DbSet<Picket> Pickets { get; set; }
         public DbSet<Operator> Operators { get; set; }
         public DbSet<Measuring> Measurings { get; set; }
+        public static string ConnectionString { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseSqlServer($@"Server=.;Database=AggAppNew;Trusted_Connection=True;TrustServerCertificate=True;");
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AgeenkovAppNew;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AgeenkovApp;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database={ConnectionString};Trusted_Connection=True;");
+        }
+
+        public AggContext() { }
+        public AggContext(string connectionStr) {
+            ConnectionString = connectionStr;
         }
 
         private static AggContext loadAll;
         public static AggContext LoadAll(){
             if(loadAll == null) { 
-                loadAll = new AggContext();
+                loadAll = new AggContext(ConnectionString);
 
                 loadAll.Customers.Load();
                 loadAll.Projects.Load();

@@ -29,7 +29,7 @@
 
         <StackPanel Grid.Row="1">
             <Label>Точки площади:</Label>
-            <ScrollViewer MinWidth="230" Width="auto" MinHeight="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer MinWidth="230" Width="auto" Height="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView ItemsSource="{Binding Area.Coords}" SelectedItem="{Binding SelectedCoord}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -57,9 +57,8 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="70" Height="25" Margin="0,0,6,0" Content="Add" Command="{Binding AddCoordCmd}"/>
-                <Button Width="70" Height="25" Margin="3,0,3,0" Content="Add random" Command="{Binding AddRndCoordCmd}"/>
-                <Button Width="70" Height="25" Margin="6,0,0,0" Content="Delete" Command="{Binding DeleteCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteCoordCmd}"/>
             </StackPanel>
         </StackPanel>
 
