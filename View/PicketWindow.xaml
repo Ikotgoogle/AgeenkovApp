@@ -40,7 +40,7 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Удалить" Command="{Binding DataContext.УдалитьMeasuringCmd, ElementName=Main}" CommandParameter="{Binding}"/>
+                                    <Button Content="Удалить" Command="{Binding DataContext.DeleteMeasuringCmd, ElementName=Main}" CommandParameter="{Binding}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

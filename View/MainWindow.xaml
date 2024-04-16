@@ -61,8 +61,8 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <TextBlock Text="{Binding Name}" Padding="3"/>
-                                <Button Content="Open" Command="{Binding DataContext.OpenAreaCommand, ElementName=Main}" CommandParameter="{Binding}"/>
+                                <TextBlock Text="{Binding Name}" Padding="5"/>
+                                <Button Content="Открыть" Command="{Binding DataContext.OpenAreaCommand, ElementName=Main}" CommandParameter="{Binding}"/>
                             </DockPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
