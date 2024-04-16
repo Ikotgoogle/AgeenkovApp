@@ -8,7 +8,7 @@
         xmlns:viewmodel="clr-namespace:AgeenkovApp.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:ProfileVM}"
         mc:Ignorable="d"
-        Title="ProfileWindow" 
+        Title="Окно профиля" 
         MinHeight="550" Height="550" 
         MinWidth="760" Width="760"
         Name="Main">
@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel>
-            <Label>Operator:</Label>
+            <Label>Оператор:</Label>
             <ComboBox Margin="3" ItemsSource="{Binding Operators}" SelectedItem="{Binding SelectedOperator}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -36,8 +36,8 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Center">
-                <Button MinWidth="50" Width="auto" Height="20" Margin="0,0,10,0" Content="Add" Command="{Binding AddNewOperatorCmd}"/>
-                <Button MinWidth="50" Width="auto" Height="20" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteOperatorCmd}"/>
+                <Button MinWidth="50" Width="auto" Height="20" Margin="0,0,10,0" Content="Добавить" Command="{Binding AddNewOperatorCmd}"/>
+                <Button MinWidth="50" Width="auto" Height="20" Margin="10,0,0,0" Content="Удалить" Command="{Binding DeleteOperatorCmd}"/>
             </StackPanel>
         </StackPanel>
 
@@ -71,8 +71,8 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddProfileCoordCmd}"/>
-                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteProfileCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Добавить" Command="{Binding AddProfileCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Удалить" Command="{Binding DeleteProfileCoordCmd}"/>
             </StackPanel>
         </StackPanel>
 
@@ -99,7 +99,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
-                                <Button Command="{Binding DataContext.OpenPicketCmd, ElementName=Main}" CommandParameter="{Binding}" Content="Open" Margin="20,0,0,0"/>
+                                <Button Command="{Binding DataContext.OpenPicketCmd, ElementName=Main}" CommandParameter="{Binding}" Content="Открыть" Margin="20,0,0,0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -107,8 +107,8 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddPicketCmd}"/>
-                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeletePicketCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Добавить" Command="{Binding AddPicketCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Удалить" Command="{Binding DeletePicketCmd}"/>
             </StackPanel>
         </StackPanel>
         

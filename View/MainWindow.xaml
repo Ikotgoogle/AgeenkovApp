@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:VM="clr-namespace:AgeenkovApp.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Главное окно" 
         MinHeight="550" Height="550" 
         MinWidth="760" Width="760"
         Name="Main">
@@ -35,8 +35,8 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Add" Command="{Binding AddNewCustomerCommand}"/>
-                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Delete" Command="{Binding DeleteCustomerCommand}"/>
+                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Добавить" Command="{Binding AddNewCustomerCommand}"/>
+                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Удалить" Command="{Binding DeleteCustomerCommand}"/>
             </StackPanel>
         </StackPanel>
 
@@ -50,8 +50,8 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Add" Command="{Binding AddNewProjectCommand}"/>
-                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Delete" Command="{Binding DeleteProjectCommand}"/>
+                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Добавить" Command="{Binding AddNewProjectCommand}"/>
+                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Удалить" Command="{Binding DeleteProjectCommand}"/>
             </StackPanel>
         </StackPanel>
 
@@ -69,8 +69,8 @@
                 </ListView>
             </ScrollViewer>
             <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Add" Command="{Binding AddNewAreaCommand}"/>
-                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Delete" Command="{Binding DeleteAreaCommand}"/>
+                <Button Width="100" Height="25" Margin="0,0,15,0" Content="Добавить" Command="{Binding AddNewAreaCommand}"/>
+                <Button Width="100" Height="25" Margin="15,0,0,0" Content="Удалить" Command="{Binding DeleteAreaCommand}"/>
             </StackPanel>
         </StackPanel>
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgeenkovApp.View" 
         xmlns:viewmodel="clr-namespace:AgeenkovApp.ViewModel"
-        Title="NewMeasuring" 
+        Title="Новое измерение" 
         Height="220" Width="400" 
         ResizeMode="NoResize">
     <Grid>
@@ -43,8 +43,8 @@
                     </ComboBox>
                 </DockPanel>-->
                 <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.575,1.238" Orientation="Horizontal">
-                    <Button Width="50" Height="22" Margin="0,0,15,0" Click="Button_Click" IsDefault="True">Save</Button>
-                    <Button Width="50" Height="22" Margin="15,0,0,0" IsCancel="True" >Cancel</Button>
+                    <Button Width="70" Height="22" Margin="0,0,15,0" Click="Button_Click" IsDefault="True">Сохранить</Button>
+                    <Button Width="70" Height="22" Margin="15,0,0,0" IsCancel="True">Отмена</Button>
                 </StackPanel>
             </StackPanel>
         </Border>

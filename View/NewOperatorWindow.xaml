@@ -7,7 +7,7 @@
         xmlns:model="clr-namespace:AgeenkovApp.Model" 
         d:DataContext="{d:DesignInstance Type=model:Operator}"
         mc:Ignorable="d"
-        Title="NewOperatorWindow" 
+        Title="Новый оператор" 
         Height="325" Width="400" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,8 +39,8 @@
                     <TextBox Margin="10,0,0,0" Width="150" Height="22" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="{Binding Path=Email}"></TextBox>
                 </DockPanel>
                 <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.575,1.238" Orientation="Horizontal">
-                    <Button Width="50" Height="22" Margin="0,0,15,0" Click="Button_Click" IsDefault="True">Save</Button>
-                    <Button Width="50" Height="22" Margin="15,0,0,0" IsCancel="True">Cancel</Button>
+                    <Button Width="70" Height="22" Margin="0,0,15,0" Click="Button_Click" IsDefault="True">Сохранить</Button>
+                    <Button Width="70" Height="22" Margin="15,0,0,0" IsCancel="True">Отмена</Button>
                 </StackPanel>
             </StackPanel>
         </Border>

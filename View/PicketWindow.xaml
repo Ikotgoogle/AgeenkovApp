@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AgeenkovApp.View" 
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="PicketWindow" 
+        Title="Окно пикета" 
         Height="450" Width="1000"
         MinHeight="450" MinWidth="800" Name="Main">
     <Grid>
@@ -24,8 +24,8 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Picket ID" DisplayMemberBinding="{Binding Picket.Id}"/>
-                        <GridViewColumn Header="Operator">
+                        <GridViewColumn Header="ID пикета" DisplayMemberBinding="{Binding Picket.Id}"/>
+                        <GridViewColumn Header="Оператор">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -35,12 +35,12 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Time" DisplayMemberBinding="{Binding MeasuringDateTime}"/>
-                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding MeasuringValue}"/>
+                        <GridViewColumn Header="Время" DisplayMemberBinding="{Binding MeasuringDateTime}"/>
+                        <GridViewColumn Header="Значение" DisplayMemberBinding="{Binding MeasuringValue}"/>
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Delete" Command="{Binding DataContext.DeleteMeasuringCmd, ElementName=Main}" CommandParameter="{Binding}"/>
+                                    <Button Content="Удалить" Command="{Binding DataContext.УдалитьMeasuringCmd, ElementName=Main}" CommandParameter="{Binding}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -50,8 +50,8 @@
         </ScrollViewer>
 
         <StackPanel  Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Width="200" Height="25" Margin="10,0,0,0" Content="Add data" Command="{Binding AddMeasuringCmd}"/>
-            <Button Width="200" Height="25" Margin="10,0,0,0" Content="Refresh" Command="{Binding RefreshCmd}"/>
+            <Button Width="200" Height="25" Margin="10,0,0,0" Content="Добавить измерение" Command="{Binding AddMeasuringCmd}"/>
+            <Button Width="200" Height="25" Margin="10,0,0,0" Content="Обновить график" Command="{Binding RefreshCmd}"/>
         </StackPanel>
 
         <ScrollViewer Grid.Column="1" Grid.RowSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

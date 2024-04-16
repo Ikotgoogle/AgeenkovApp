@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:AgeenkovApp.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:AreaVM}"
         mc:Ignorable="d"
-        Title="AreasWindows" 
+        Title="Окно площади" 
         MinHeight="550" Height="550" 
         MinWidth="760" Width="760"
         Name="Main">
@@ -57,8 +57,8 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddCoordCmd}"/>
-                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Добавить" Command="{Binding AddCoordCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Удалить" Command="{Binding DeleteCoordCmd}"/>
             </StackPanel>
         </StackPanel>
 
@@ -70,7 +70,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Id}" Padding="5"/>
-                                <Button Content="Open" Command="{Binding DataContext.OpenProfileCmd, ElementName=Main}" CommandParameter="{Binding}"/>
+                                <Button Content="Открыть" Command="{Binding DataContext.OpenProfileCmd, ElementName=Main}" CommandParameter="{Binding}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -78,8 +78,8 @@
             </ScrollViewer>
 
             <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Add" Command="{Binding AddProfileCmd}"/>
-                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Delete" Command="{Binding DeleteProfileCmd}"/>
+                <Button Width="100" Height="25" Margin="0,0,10,0" Content="Добавить" Command="{Binding AddProfileCmd}"/>
+                <Button Width="100" Height="25" Margin="10,0,0,0" Content="Удалить" Command="{Binding DeleteProfileCmd}"/>
             </StackPanel>
         </StackPanel>
         
