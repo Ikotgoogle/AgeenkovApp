@@ -15,7 +15,7 @@ namespace AgeenkovApp.Model {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AgeenkovApp;Trusted_Connection=True;");
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database={ConnectionString};Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer($@"Server=(localdb)\mssqllocaldb;Database={ConnectionString};Trusted_Connection=True;");
         }
 
         public AggContext() { }
